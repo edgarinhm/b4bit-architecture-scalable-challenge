@@ -52,3 +52,7 @@ Monitoring the pipeline’s performance and resource usage is critical for detec
 #### 6. Enterprise-Grade Security & Governance
 
 Ensuring data security and regulatory compliance is critical for any data processing pipeline. Governance must be in place to control access and ensure data is protected throughout its lifecycle.
+
+### Cloud Data Architecture Diagram
+
+![cloud-digram](data-batch-and-stream-architecture-diagram.drawio.svg)
