@@ -53,7 +53,7 @@ The trust policy should look something like this:
         runs-on: ubuntu-latest
         steps:
         - name: Checkout code
-            uses: actions/checkout@v2
+            uses: actions/checkout@v4
 
         - name: Configure AWS credentials using OIDC
             uses: aws-actions/configure-aws-credentials@v2
