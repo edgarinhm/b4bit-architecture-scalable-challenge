@@ -88,7 +88,7 @@ jobs:
 
   terraform_apply:
     needs: terraform
-    name: Terraform Apply
+    name: Terraform Deploy
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 

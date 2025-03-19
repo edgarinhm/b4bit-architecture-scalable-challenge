@@ -56,3 +56,9 @@ Ensuring data security and regulatory compliance is critical for any data proces
 ### Cloud Data Architecture Diagram
 
 ![cloud-digram](data-batch-and-stream-architecture-diagram.drawio.svg)
+
+### Github strategy
+
+Ensure secure repository adding github branch rule require a pull request before merging rule to prevent changes direct to main with at least 1 approval(s) from other collaborators of the repo.
+
+![githug-workflow-digram](terraform-pipeline-workflow.drawio.svg)
