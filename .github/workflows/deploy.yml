@@ -77,6 +77,11 @@ jobs:
     if: github.event_name == 'pull_request'
 
     steps:
+      - name: "Set up Terraform"
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ vars.TF_VERSION }}
+
       - name: Terraform Plan
         id: plan
         run: terraform plan -out=tfplan
@@ -88,6 +93,11 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     steps:
+      - name: "Set up Terraform"
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ vars.TF_VERSION }}
+
       - name: Terraform Plan
         id: plan
         run: terraform plan
