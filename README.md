@@ -67,7 +67,7 @@ Ensure secure repository adding github branch rule require a pull request before
 
 The GitHub Actions workflow automates the following:
 
-- **`terraform flint`:** Validate the Terraform linter files.
+- **`terraform tflint`:** Validate the Terraform linter files.
 - **`terraform tfsec`:** Checks the Terraform security.
 - **`terraform init`:** Initializes the Terraform working directory.
 - **`terraform plan`:** Generates a Terraform plan on pull requests. The plan is also added as a comment to the pull request.
