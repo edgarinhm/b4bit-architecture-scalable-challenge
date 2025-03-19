@@ -16,7 +16,7 @@ ingestion, processing, and storage securely and efficiently.
 - Stream processing: Records are read in the order they’re produced, allowing for real-time analytics or streaming ETL
 - Destination: Data lake Data warehouse Database OpenSearch Event driven Applications
 
-![reference-architecture-design](data-batch-and-stream-reference-architecture.drawio.svg)
+![reference-architecture-design](architecture/data-batch-and-stream-reference-architecture.drawio.svg)
 
 #### Pipeline Overview
 
