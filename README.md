@@ -74,6 +74,6 @@ The GitHub Actions workflow automates the following:
 - **`terraform apply`:** Applies the Terraform plan automatically when changes are merged into the `main` branch.
 - **`terraform destroy`:** Destroys the Terraform plan automatically following the schedule rule.
 
-### Using OIDC (OpenID Connect) in GitHub Actions
+#### Using OIDC (OpenID Connect) in GitHub Actions
 
 OpenID Connect (OIDC) offers a more secure way to authenticate GitHub Actionswith AWS. Instead of storing long-term credentials, GitHub dynamically generates ashort-lived token that AWS verifies via a trust relationship. This token allows GitHubto assume an IAM role temporarily, limiting the scope and duration of AWS access [aws-authorization-strategy](architecture/AWSAuthorizationStrategy.md)
