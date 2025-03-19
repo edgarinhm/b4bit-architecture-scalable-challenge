@@ -62,3 +62,14 @@ Ensuring data security and regulatory compliance is critical for any data proces
 Ensure secure repository adding github branch rule require a pull request before merging rule to prevent changes direct to main with at least 1 approval(s) from other collaborators of the repo.
 
 ![github-workflow-diagram](architecture/terraform-pipeline-workflow.drawio.svg)
+
+**CI/CD Pipeline:**
+
+The GitHub Actions workflow automates the following:
+
+- **`terraform flint`:** Validate the Terraform linter files.
+- **`terraform tfsec`:** Checks the Terraform security.
+- **`terraform init`:** Initializes the Terraform working directory.
+- **`terraform plan`:** Generates a Terraform plan on pull requests. The plan is also added as a comment to the pull request.
+- **`terraform apply`:** Applies the Terraform plan automatically when changes are merged into the `main` branch.
+- **`terraform destroy`:** Destroys the Terraform plan automatically following the schedule rule.
