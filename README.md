@@ -59,6 +59,6 @@ Ensuring data security and regulatory compliance is critical for any data proces
 
 ### Github strategy
 
-Ensure secure repository adding github branch rule require a pull request before merging rule to prevent changes direct to main with at least 1 approval(s) from other colaborators of the repo.
+Ensure secure repository adding github branch rule require a pull request before merging rule to prevent changes direct to main with at least 1 approval(s) from other collaborators of the repo.
 
 ![githug-workflow-digram](terraform-pipeline-workflow.drawio.svg)
