@@ -9,4 +9,9 @@ resource "aws_kinesis_stream" "temperature-data-stream-tf" {
   tags = {
     Name = "TemperatureDataStream"
   }
+  encryption_type = "KMS"
+  kms_key_id      = aws_kms_key.data-kinesis-lambda-key.arn
 }
+
+
+
