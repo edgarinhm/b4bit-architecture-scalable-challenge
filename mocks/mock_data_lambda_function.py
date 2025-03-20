@@ -12,7 +12,7 @@ def lambda_handler(event, context):
     response = kinesis_client.put_record(
         StreamName='TemperatureDataStream',
         Data=data,
-        PartitionKey='partition_key'  # This can be any string like 'temp'
+        PartitionKey='temp_partition_key'  # This can be any string like 'temp'
     )
     
     return response 
