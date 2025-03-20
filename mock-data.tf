@@ -12,5 +12,5 @@ resource "aws_lambda_function" "data-generator-function" {
   timeout          = 300
   memory_size      = 128
   source_code_hash = data.archive_file.python_lambda_package.output_base64sha256
-  filename         = data.archive_file.lambda.output_path
+  filename         = data.archive_file.python_lambda_package.output_path
 }
