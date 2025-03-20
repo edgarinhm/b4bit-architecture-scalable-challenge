@@ -7,7 +7,7 @@ data "archive_file" "python_processing_lambda_package" {
 resource "aws_lambda_function" "data-processing-function-tf" {
   function_name    = "DataProcessingFunction"
   runtime          = var.aws_python_version
-  handler          = "kinesis_lambda_function.lambda_handler"
+  handler          = "processing_data_lambda_function.lambda_handler"
   role             = aws_iam_role.lambda_role_tf.arn
   timeout          = 300
   memory_size      = 128

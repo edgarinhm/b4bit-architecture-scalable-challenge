@@ -23,6 +23,13 @@ resource "aws_iam_role" "lambda_role_tf" {
           Service = "logs.amazonaws.com"
         }
       },
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "kinesis.amazonaws.com"
+        }
+      },
     ]
   })
 
