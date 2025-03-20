@@ -5,6 +5,27 @@ resource "aws_s3_bucket" "data_lake" {
   }
 }
 
+resource "aws_s3_bucket_acl" "data_lake_acl" {
+  bucket = aws_s3_bucket.data_lake.id
+  acl    = "private"
+}
+
+resource "aws_s3_bucket" "log_bucket" {
+  bucket = "my-tf-log-bucket"
+}
+
+resource "aws_s3_bucket_acl" "log_bucket_acl" {
+  bucket = aws_s3_bucket.log_bucket.id
+  acl    = "log-delivery-write"
+}
+
+resource "aws_s3_bucket_logging" "data_lake_logging" {
+  bucket = aws_s3_bucket.data_lake.id
+
+  target_bucket = aws_s3_bucket.log_bucket.id
+  target_prefix = "log/"
+}
+
 resource "aws_s3_bucket_server_side_encryption_configuration" "data_lake_encryption" {
   bucket = aws_s3_bucket.data_lake.id
 
@@ -30,4 +51,13 @@ resource "aws_s3_bucket_public_access_block" "data_lake_block_public_access" {
   block_public_policy     = true
   ignore_public_acls      = true
   restrict_public_buckets = true
+}
+
+#Enable versioning
+resource "aws_s3_bucket_versioning" "data_lake_versioning" {
+  bucket = aws_s3_bucket.data_lake.id
+
+  versioning_configuration {
+    status = "Enabled"
+  }
 }
