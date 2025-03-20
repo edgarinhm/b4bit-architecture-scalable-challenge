@@ -7,4 +7,11 @@ terraform {
     encrypt      = true
     use_lockfile = true #S3 native locking
   }
+
+  required_providers {
+    aws = {
+      version = "~> 5.0"
+      source  = "hashicorp/aws"
+    }
+  }
 }
