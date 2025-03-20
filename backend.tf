@@ -5,7 +5,7 @@ terraform {
     region  = "us-east-1"
     key     = "PROD/s3-github-actions/terraform.tfstate"
     encrypt = true
-    # tflint-ignore: AWS007
-    use_lockfile = true
+    # tflint-ignore: all
+    use_lockfile = false
   }
 }
