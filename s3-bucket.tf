@@ -1,5 +1,8 @@
 resource "aws_s3_bucket" "data_lake" {
   bucket = var.aws_s3_bucket_data_lake_name
+  tags = {
+    Name = "Data Lake bucket"
+  }
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "data_lake_encryption" {
