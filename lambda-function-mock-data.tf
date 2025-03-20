@@ -1,6 +1,6 @@
 data "archive_file" "python_lambda_package" {
   type        = "zip"
-  source_file = "${path.module}/mocks/mock_data_lambda_function.py"
+  source_file = "${path.module}/lambda-functions/mock_data_lambda_function.py"
   output_path = "${path.module}/mock_data_lambda_function.zip"
 }
 
