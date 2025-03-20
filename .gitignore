@@ -39,4 +39,4 @@ terraform.rc
 .terraform.lock.hcl
 
 # Ignore zip files
-.zip
+*.zip
