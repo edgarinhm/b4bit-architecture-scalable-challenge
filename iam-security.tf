@@ -1,4 +1,4 @@
-resource "aws_iam_role" " " {
+resource "aws_iam_role" "lambda_role_tf" {
   name = "lambda-role-tf"
 
   assume_role_policy = jsonencode({
