@@ -1,4 +1,4 @@
-resource "aws_iam_role" "lambda_role_tf" {
+resource "aws_iam_role" " " {
   name = "lambda-role-tf"
 
   assume_role_policy = jsonencode({
@@ -37,6 +37,7 @@ resource "aws_iam_role_policy" "lambda_policy" {
         ]
         Resource = [
           "arn:aws:s3:::${aws_s3_bucket.data_lake.id}",
+          "arn:aws:s3:::${aws_s3_bucket.data_lake.id}/*",
           "arn:aws:logs:*:*:*"
         ]
       }
