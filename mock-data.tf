@@ -16,13 +16,6 @@ resource "aws_lambda_function" "data-generator-function" {
   tracing_config {
     mode = "Active"
   }
-
-  kms_key_arn = aws_kms_key.data-kinesis-lambda-key.arn
-  environment {
-    variables = {
-      KINESIS_STREAM_NAME = aws_kinesis_stream.temperature-data-stream-tf.name
-    }
-  }
 }
 
 resource "aws_lambda_permission" "allow_cloudwatch" {
