@@ -83,3 +83,12 @@ resource "aws_s3_bucket_versioning" "data_lake_versioning" {
     status = "Enabled"
   }
 }
+
+#Enable versioning
+resource "aws_s3_bucket_versioning" "data_lake_log_versioning" {
+  bucket = aws_s3_bucket.log_bucket.id
+
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
