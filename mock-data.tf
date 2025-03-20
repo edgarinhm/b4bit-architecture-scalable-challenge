@@ -17,7 +17,7 @@ resource "aws_lambda_function" "data-generator-function" {
     mode = "Active"
   }
 
-  kms_key_arn = aws_kms_key.data-lambda-key.arn
+  kms_key_arn = aws_kms_key.data-kinesis-lambda-key.arn
   environment {
     variables = {
       KINESIS_STREAM_NAME = aws_kinesis_stream.temperature-data-stream-tf.name
@@ -50,12 +50,4 @@ resource "aws_lambda_event_source_mapping" "kinesis-data-stream-event-source-tf"
   function_name     = aws_lambda_function.data-generator-function.arn
   starting_position = "LATEST"
   batch_size        = 100
-}
-
-
-
-resource "aws_kms_key" "data-lambda-key" {
-  description             = "KMS key for data lambda encryption"
-  deletion_window_in_days = 7
-  enable_key_rotation     = true
 }
