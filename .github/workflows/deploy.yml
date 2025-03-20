@@ -86,6 +86,9 @@ jobs:
         with:
           terraform_version: ${{ vars.TF_VERSION }}
 
+      - name: "Terraform Init"
+        run: terraform init
+
       - name: Terraform Plan
         id: plan
         run: terraform plan -out=tfplan
@@ -111,6 +114,9 @@ jobs:
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: ${{ vars.TF_VERSION }}
+
+      - name: "Terraform Init"
+        run: terraform init
 
       - name: Terraform Plan
         id: plan
