@@ -13,4 +13,7 @@ resource "aws_lambda_function" "data-generator-function" {
   memory_size      = 128
   source_code_hash = data.archive_file.python_lambda_package.output_base64sha256
   filename         = data.archive_file.python_lambda_package.output_path
+  tracing_config {
+    mode = "Active"
+  }
 }
