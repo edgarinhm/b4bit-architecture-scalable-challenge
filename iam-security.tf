@@ -36,7 +36,7 @@ resource "aws_iam_role_policy" "lambda_policy" {
           "logs:PutLogEvents"
         ]
         Resource = [
-          "${aws_s3_bucket.data_lake.arn}",
+          "arn:aws:s3:::${aws_s3_bucket.data_lake.id}",
           "arn:aws:logs:*:*:*"
         ]
       }
