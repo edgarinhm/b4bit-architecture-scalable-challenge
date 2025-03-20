@@ -13,7 +13,6 @@ resource "aws_iam_role" "lambda_role_tf" {
         }, {
         Action = "sts:AssumeRole"
         Effect = "Allow"
-        Sid    = ""
         Principal = {
           Service = "s3.amazonaws.com"
         }
@@ -36,14 +35,11 @@ resource "aws_iam_role_policy" "lambda_policy" {
       {
         Effect = "Allow"
         Action = [
-          "s3:GetObject",
-          "s3:PutObject",
           "logs:CreateLogGroup",
           "logs:CreateLogStream",
           "logs:PutLogEvents"
         ]
         Resource = [
-          "${aws_s3_bucket.data_lake.arn}/*",
           "arn:aws:logs:*:*:*"
         ]
       }
