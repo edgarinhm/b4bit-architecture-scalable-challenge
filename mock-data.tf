@@ -37,3 +37,10 @@ resource "aws_cloudwatch_event_target" "data-generator-lambda-function-target" {
   rule      = aws_cloudwatch_event_rule.data-generator-lambda-event.name
   arn       = aws_lambda_function.data-generator-function.arn
 }
+
+resource "aws_lambda_event_source_mapping" "kinesis-data-stream-event-source-tf" {
+  event_source_arn  = aws_kinesis_stream.temperature-data-stream-tf.arn
+  function_name     = aws_lambda_function.data-generator-function.arn
+  starting_position = "LATEST"
+  batch_size        = 100
+}
