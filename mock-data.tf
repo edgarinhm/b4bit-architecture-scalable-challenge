@@ -6,7 +6,7 @@ data "archive_file" "python_lambda_package" {
 
 resource "aws_lambda_function" "data-generator-function" {
   function_name    = "DataGeneratorFunction"
-  runtime          = "python3.8"
+  runtime          = var.aws_python_version
   handler          = "mock_data_lambda_function.lambda_handler"
   role             = aws_iam_role.lambda_role_tf.arn
   timeout          = 300
