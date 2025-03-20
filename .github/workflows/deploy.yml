@@ -19,9 +19,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Authenticate to AWS Cloud
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -35,6 +32,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: "Set up Terraform"
         uses: hashicorp/setup-terraform@v3
         with:
@@ -77,6 +77,9 @@ jobs:
     if: github.event_name == 'pull_request'
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: "Set up Terraform"
         uses: hashicorp/setup-terraform@v3
         with:
@@ -93,6 +96,9 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: "Set up Terraform"
         uses: hashicorp/setup-terraform@v3
         with:
