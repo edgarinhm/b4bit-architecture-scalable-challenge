@@ -14,26 +14,20 @@ permissions:
   contents: read # This is required for actions/checkout
 
 jobs:
-  aws_assume_role:
-    name: Assume AWS Role
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Authenticate to AWS Cloud
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: ${{ secrets.AWS_TERRAFORM_ROLE }}
-          role-session-name: terraform-role-session
-          aws-region: ${{ secrets.AWS_REGION }}
-
   terraform:
-    needs: aws_assume_role
     name: "Terraform Lint, Security Check, and Validate"
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Authenticate to AWS Cloud
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_TERRAFORM_ROLE }}
+          role-session-name: terraform-role-session
+          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: "Set up Terraform"
         uses: hashicorp/setup-terraform@v3
@@ -80,6 +74,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Authenticate to AWS Cloud
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_TERRAFORM_ROLE }}
+          role-session-name: terraform-role-session
+          aws-region: ${{ secrets.AWS_REGION }}
+
       - name: "Set up Terraform"
         uses: hashicorp/setup-terraform@v3
         with:
@@ -98,6 +99,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Authenticate to AWS Cloud
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_TERRAFORM_ROLE }}
+          role-session-name: terraform-role-session
+          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: "Set up Terraform"
         uses: hashicorp/setup-terraform@v3
