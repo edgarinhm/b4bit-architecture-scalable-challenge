@@ -5,7 +5,7 @@ import json
 kinesis_client = boto3.client('kinesis')
 
 def lambda_handler(event, context):
-    temperature = ... # Your code to generate the temperature reading
+    temperature = random.uniform(20.0, 30.0)  # Random temperature between 20 and 30
     data = json.dumps({'temperature': temperature})
     
     # Send the data to Kinesis
