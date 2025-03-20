@@ -10,7 +10,14 @@ resource "aws_iam_role" "lambda_role_tf" {
         Principal = {
           Service = "lambda.amazonaws.com"
         }
-      }
+        }, {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "s3.amazonaws.com"
+        }
+      },
     ]
   })
 
@@ -36,8 +43,7 @@ resource "aws_iam_role_policy" "lambda_policy" {
           "logs:PutLogEvents"
         ]
         Resource = [
-          "arn:aws:s3:::${aws_s3_bucket.data_lake.id}",
-          "arn:aws:s3:::${aws_s3_bucket.data_lake.id}/*",
+          "${aws_s3_bucket.data_lake.arn}/*",
           "arn:aws:logs:*:*:*"
         ]
       }
