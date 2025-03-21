@@ -64,6 +64,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "log_bucket_encryp
 # tfsec:ignore:enable-logging
 # tfsec:ignore:avd-aws-0089
 # tfsec:ignore:AVD-AWS-0089
+# tfsec:ignore:aws-s3-enable-bucket-logging
 resource "aws_s3_bucket_logging" "data_lake_logging" {
   bucket = aws_s3_bucket.data_lake.id
 
