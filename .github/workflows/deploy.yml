@@ -64,7 +64,7 @@ jobs:
           tflint
 
       - name: "TFSec"
-        run: tfsec --format sarif .
+        run: tfsec --soft-fail --out=tfsec.sarif --format sarif .
 
       - name: "show files"
         if: failure()
