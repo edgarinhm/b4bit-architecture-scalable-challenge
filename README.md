@@ -77,3 +77,73 @@ The GitHub Actions workflow automates the following:
 #### Using OIDC (OpenID Connect) in GitHub Actions
 
 OpenID Connect (OIDC) offers a more secure way to authenticate GitHub Actionswith AWS. Instead of storing long-term credentials, GitHub dynamically generates ashort-lived token that AWS verifies via a trust relationship. This token allows GitHubto assume an IAM role temporarily, limiting the scope and duration of AWS access [aws-authorization-strategy](architecture/AWSAuthorizationStrategy.md)
+
+#### DevOps aws role to authorize github actions
+
+Create a new rol for OIDC connection with the following policies:
+
+![image](https://github.com/user-attachments/assets/a0096d62-6e60-4975-b017-72dbba527a74)
+
+##### Custom policies:
+custom-mock-data-generation-policy
+```javascript
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "CustomRoleLambdaS1",
+			"Effect": "Allow",
+			"Action": [
+				"lambda:CreateFunction",
+				"lambda:GetFunction",
+				"lambda:ListVersionsByFunction",
+				"lambda:GetFunctionCodeSigningConfig",
+				"lambda:DeleteFunction",
+				"lambda:AddPermission",
+				"lambda:GetPolicy",
+				"lambda:RemovePermission",
+				"lambda:CreateEventSourceMapping",
+				"lambda:GetEventSourceMapping",
+				"lambda:ListTags",
+				"lambda:DeleteEventSourceMapping"
+			],
+			"Resource": [
+				"*"
+			]
+		},
+		{
+			"Sid": "CustomRoleEventS1",
+			"Effect": "Allow",
+			"Action": [
+				"events:PutRule",
+				"events:DescribeRule",
+				"events:ListTagsForResource",
+				"events:DeleteRule",
+				"events:PutTargets",
+				"events:ListTargetsByRule",
+				"events:RemoveTargets"
+			],
+			"Resource": [
+				"*"
+			]
+		}
+	]
+}
+```
+custom-role-kms-key-rotation-policy
+```javascript
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "CustomEnableKeyRotationS1",
+			"Effect": "Allow",
+			"Action": [
+				"kms:EnableKeyRotation",
+				"kms:ScheduleKeyDeletion"
+			],
+			"Resource": "*"
+		}
+	]
+}
+```
