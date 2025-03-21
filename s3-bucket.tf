@@ -60,11 +60,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "log_bucket_encryp
   }
 }
 
-resource "aws_s3_bucket_acl" "data_lake_log_acl" {
-  bucket = aws_s3_bucket.data_lake_log.id
-  acl    = "log-delivery-write"
-}
-
+#Logging
 resource "aws_s3_bucket_logging" "data_lake_logging" {
   bucket = aws_s3_bucket.data_lake.id
 
