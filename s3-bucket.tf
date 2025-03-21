@@ -60,7 +60,6 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "log_bucket_encryp
   }
 }
 
-#Logging
 # tfsec:ignore:aws-s3-enable-logging
 # tfsec:ignore:enable-logging
 # tfsec:ignore:avd-aws-0089
