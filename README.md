@@ -130,4 +130,20 @@ custom-mock-data-generation-policy
 	]
 }
 ```
-
+custom-role-kms-key-rotation-policy
+```javascript
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "CustomEnableKeyRotationS1",
+			"Effect": "Allow",
+			"Action": [
+				"kms:EnableKeyRotation",
+				"kms:ScheduleKeyDeletion"
+			],
+			"Resource": "*"
+		}
+	]
+}
+```
