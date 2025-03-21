@@ -22,14 +22,7 @@ resource "aws_iam_role" "lambda_role_tf" {
         Principal = {
           Service = "logs.amazonaws.com"
         }
-      },
-      {
-        Action = "sts:AssumeRole"
-        Effect = "Allow"
-        Principal = {
-          Service = "kinesis.amazonaws.com"
-        }
-      },
+      }
     ]
   })
 
@@ -38,24 +31,27 @@ resource "aws_iam_role" "lambda_role_tf" {
   }
 }
 
-# resource "aws_iam_role_policy" "lambda_policy" {
-#   name = "processing-data-lambda-policy"
-#   role = aws_iam_role.lambda_role_tf.id
+resource "aws_iam_role_policy" "role_kinesis_policy" {
+  name = "lambda-kinesis-policy"
+  role = aws_iam_role.lambda_role_tf.id
 
-#   policy = jsonencode({
-#     Version = "2012-10-17"
-#     Statement = [
-#       {
-#         Effect = "Allow"
-#         Action = [
-#           "logs:CreateLogGroup",
-#           "logs:CreateLogStream",
-#           "logs:PutLogEvents"
-#         ]
-#         Resource = [
-#           "arn:aws:logs:*:*:*"
-#         ]
-#       }
-#     ]
-#   })
-# }
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "kinesis:GetRecords",
+          "kinesis:GetShardIterator",
+          "kinesis:DescribeStream",
+          "kinesis:DescribeStreamSummary",
+          "kinesis:ListShards",
+          "kinesis:ListStreams",
+        ]
+        Resource = [
+          "${aws_kinesis_stream.temperature-data-stream-tf.arn}"
+        ]
+      }
+    ]
+  })
+}
