@@ -77,3 +77,10 @@ The GitHub Actions workflow automates the following:
 #### Using OIDC (OpenID Connect) in GitHub Actions
 
 OpenID Connect (OIDC) offers a more secure way to authenticate GitHub Actionswith AWS. Instead of storing long-term credentials, GitHub dynamically generates ashort-lived token that AWS verifies via a trust relationship. This token allows GitHubto assume an IAM role temporarily, limiting the scope and duration of AWS access [aws-authorization-strategy](architecture/AWSAuthorizationStrategy.md)
+
+#### DevOps aws role to authorize github actions
+
+Create a new rol for OIDC connection with the following policies:
+
+![image](https://github.com/user-attachments/assets/a0096d62-6e60-4975-b017-72dbba527a74)
+
