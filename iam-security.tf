@@ -57,17 +57,11 @@ data "aws_iam_policy_document" "role_dynamodb_policy_document" {
       "dynamodb:Scan",
       "dynamodb:PutItem",
       "dynamodb:UpdateItem",
-      "dynamodb:DeleteItem"
-    ]
-    resources = [aws_dynamodb_table.data_lake.arn]
-  }
-  statement {
-    effect = "Allow"
-    actions = [
+      "dynamodb:DeleteItem",
       "dynamodb:DescribeTable",
       "dynamodb:ListTables"
     ]
-    resources = ["*"]
+    resources = [aws_dynamodb_table.data_lake.arn]
   }
 }
 
