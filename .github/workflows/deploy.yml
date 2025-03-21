@@ -17,6 +17,10 @@ jobs:
   terraform:
     name: "Terraform Lint, Security Check, and Validate"
     runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
 
     steps:
       - name: Checkout code
