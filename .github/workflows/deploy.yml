@@ -17,6 +17,7 @@ permissions:
 
 jobs:
   terraform:
+    environment: dev
     name: "Terraform Lint, Security Check, and Validate"
     runs-on: ubuntu-latest
 
@@ -40,7 +41,7 @@ jobs:
         run: |
           echo "TF_VAR_aws_region=${{ secrets.AWS_REGION }}" >> $GITHUB_ENV
           echo "TF_VAR_project_name=${{ vars.PROJECT_NAME }}" >> $GITHUB_ENV
-          echo "TF_VAR_environment=${{ env.environment }}" >> $GITHUB_ENV
+          echo "TF_VAR_environment=${{ env.ENVIRONMENT_NAME }}" >> $GITHUB_ENV
           echo "TF_VAR_vpc_cidr=${{ vars.VPC_CIDR }}" >> $GITHUB_ENV
           echo "TF_VAR_public_subnet_az1_cidr=${{ vars.PUBLIC_SUBNET_AZ1_CIDR }}" >> $GITHUB_ENV
           echo "TF_VAR_public_subnet_az2_cidr=${{ vars.PUBLIC_SUBNET_AZ2_CIDR }}" >> $GITHUB_ENV
@@ -85,6 +86,7 @@ jobs:
           sarif_file: tfsec.sarif
 
   terraform_plan:
+    environment: dev
     needs: terraform
     name: Terraform Plan
     runs-on: ubuntu-latest
@@ -125,6 +127,7 @@ jobs:
         run: terraform plan -out=tfplan
 
   terraform_apply:
+    environment: dev
     needs: terraform
     name: Terraform Deploy
     runs-on: ubuntu-latest
@@ -150,7 +153,7 @@ jobs:
         run: |
           echo "TF_VAR_aws_region=${{ secrets.AWS_REGION }}" >> $GITHUB_ENV
           echo "TF_VAR_project_name=${{ vars.PROJECT_NAME }}" >> $GITHUB_ENV
-          echo "TF_VAR_environment=${{ env.environment }}" >> $GITHUB_ENV
+          echo "TF_VAR_environment=${{ vars.ENVIRONTMENT_NAME }}" >> $GITHUB_ENV
           echo "TF_VAR_vpc_cidr=${{ vars.VPC_CIDR }}" >> $GITHUB_ENV
           echo "TF_VAR_public_subnet_az1_cidr=${{ vars.PUBLIC_SUBNET_AZ1_CIDR }}" >> $GITHUB_ENV
           echo "TF_VAR_public_subnet_az2_cidr=${{ vars.PUBLIC_SUBNET_AZ2_CIDR }}" >> $GITHUB_ENV
