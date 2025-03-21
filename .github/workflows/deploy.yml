@@ -61,8 +61,11 @@ jobs:
           tflint --init
           tflint
 
-      - name: "tfsec"
+      - name: "TFSec"
         run: tfsec --format sarif .
+
+      - name: "show files"
+        run: ls -la
 
       - name: Upload SARIF file to GitHub Security tab
         if: failure()
