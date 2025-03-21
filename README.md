@@ -86,7 +86,7 @@ Create a new rol for OIDC connection with the following policies:
 
 ##### Custom policies:
 custom-mock-data-generation-policy
-´´´javascript
+```javascript
 {
 	"Version": "2012-10-17",
 	"Statement": [
@@ -129,5 +129,5 @@ custom-mock-data-generation-policy
 		}
 	]
 }
-´´´
+```
 
