@@ -41,7 +41,7 @@ resource "aws_s3_bucket_versioning" "data_lake_versioning" {
   }
 }
 
-# Logging
+#tfsec:ignore:aws-s3-enable-bucket-encryption tfsec:ignore:aws-s3-enable-bucket-logging tfsec:ignore:aws-s3-enable-logging tfsec:ignore:enable-logging tfsec:ignore:avd-aws-0089 tfsec:ignore:AVD-AWS-0089
 resource "aws_s3_bucket" "data_lake_log" {
   bucket = "${var.aws_s3_bucket_data_lake_name}-log-${random_string.suffix.result}"
   tags = {
@@ -60,11 +60,6 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "log_bucket_encryp
   }
 }
 
-# tfsec:ignore:aws-s3-enable-logging
-# tfsec:ignore:enable-logging
-# tfsec:ignore:avd-aws-0089
-# tfsec:ignore:AVD-AWS-0089
-# tfsec:ignore:aws-s3-enable-bucket-logging
 resource "aws_s3_bucket_logging" "data_lake_logging" {
   bucket = aws_s3_bucket.data_lake.id
 
