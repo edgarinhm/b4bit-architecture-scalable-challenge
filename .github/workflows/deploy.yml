@@ -64,7 +64,8 @@ jobs:
       - name: "tfsec"
         run: tfsec --format sarif .
 
-      - name: Upload SARIF file
+      - name: Upload SARIF file to GitHub Security tab
+        if: failure()
         uses: github/codeql-action/upload-sarif@v3
         with:
           # Path to SARIF file relative to the root of the repository
