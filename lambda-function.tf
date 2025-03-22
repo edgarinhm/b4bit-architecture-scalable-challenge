@@ -72,7 +72,7 @@ resource "aws_lambda_event_source_mapping" "kinesis-processing-dynamodb-data-str
 }
 
 #######################  Lambda Outcome Api Data #####################
-data "archive_file" "python_api_lambda_package" {
+data "archive_file" "python_api_get_lambda_package" {
   type        = "zip"
   source_file = "${path.module}/lambda-functions/api_get_data_lambda_function.py"
   output_path = "${path.module}/api_get_data_lambda_function.zip"
@@ -85,8 +85,8 @@ resource "aws_lambda_function" "api-get-average-temperature-function-tf" {
   role             = aws_iam_role.lambda_role_tf.arn
   timeout          = 300
   memory_size      = 128
-  source_code_hash = data.archive_file.python_processing_lambda_package.output_base64sha256
-  filename         = data.archive_file.python_processing_lambda_package.output_path
+  source_code_hash = data.archive_file.python_api_get_lambda_package.output_base64sha256
+  filename         = data.archive_file.python_api_get_lambda_package.output_path
 
   tracing_config {
     mode = "Active"
