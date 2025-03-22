@@ -155,3 +155,6 @@ custom-role-kms-key-rotation-policy
 ### DynamoDB processed data
 ![image](https://github.com/user-attachments/assets/2f491ed9-60bf-4444-97e6-3f41554b167b)
 
+### API get average temperature request
+![image](https://github.com/user-attachments/assets/661bb57c-ceb4-4759-9ffb-24e72a2e33dd)
+
