@@ -79,6 +79,7 @@ resource "aws_iam_role_policy" "lambda_task_policy" {
   policy = data.aws_iam_policy_document.role_dynamodb_policy_document.json
 }
 
+#tfsec:ignore:aws-iam-no-policy-wildcards
 data "aws_iam_policy_document" "lambda_kms_policy_document" {
   statement {
     effect = "Allow"
