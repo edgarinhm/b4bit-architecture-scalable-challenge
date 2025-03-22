@@ -2,8 +2,9 @@ import json
 import boto3
 import os
 
-client = boto3.client("dynamodb")
+dynamodb  = boto3.resource("dynamodb")
 table_name = 'data-table-aggregation-lake'  # Replace with your table name
+table = dynamodb.Table(table_name)
 
 def lambda_handler(event, context):
     body = None
@@ -11,23 +12,23 @@ def lambda_handler(event, context):
     headers = {
         "Content-Type": "application/json"
     }
+    
     average_temperature: int = 0
     try:
         route_key = event["routeKey"]
         
         if route_key == "GET /api/v1/temperature":
+            
+            response = table.scan()
+            items = response['Items']
+           
+            while 'LastEvaluatedKey' in response:
+                response = table.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
+                items.extend(response['Items'])
 
-            #get current average temperature
-            response = client.get_item(
-                TableName=table_name,
-                Key={
-                    "user": {"S": "temperature"}
-                }
-            )
-
-            #extract temperature
-            if "Item" in response:
-                average_temperature = int(response.get('Item',{}).get('average_temperature',{}).get('N'))
+            #extract temperature            
+            for item in items:
+                 average_temperature += item['average_temperature']
 
             message = f"Average temperature is {average_temperature}"
             body = message
