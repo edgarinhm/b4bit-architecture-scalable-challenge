@@ -16,6 +16,12 @@ resource "aws_iam_role" "lambda_role_tf" {
         Principal = {
           Service = "s3.amazonaws.com"
         }
+        }, {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "kms.amazonaws.com"
+        }
       }
     ]
   })
