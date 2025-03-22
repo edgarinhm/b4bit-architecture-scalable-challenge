@@ -41,6 +41,7 @@ resource "aws_cloudwatch_log_group" "lambda-s3-processing-log-group" {
   name = "/aws/lambda/${aws_lambda_function.data-processing-function-tf.function_name}"
 
   retention_in_days = 30
+  kms_key_id        = aws_kms_key.lambda_log_group_kms_key.arn
 }
 
 #Lambda function to store dynamodb data
@@ -83,4 +84,5 @@ resource "aws_cloudwatch_log_group" "lambda-dynamodb-processing-log-group" {
   name = "/aws/lambda/${aws_lambda_function.data-processing-dynamodb-function-tf.function_name}"
 
   retention_in_days = 30
+  kms_key_id        = aws_kms_key.lambda_log_group_kms_key.arn
 }

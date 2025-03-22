@@ -16,3 +16,9 @@ resource "aws_kms_key" "data-dynamodb-lambda-key" {
   deletion_window_in_days = 7
   enable_key_rotation     = true
 }
+resource "aws_kms_key" "lambda_log_group_kms_key" {
+  description             = "KMS key for lambda log group encryption"
+  deletion_window_in_days = 7
+  enable_key_rotation     = true
+
+}
