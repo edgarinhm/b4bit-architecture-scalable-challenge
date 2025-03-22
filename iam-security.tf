@@ -85,7 +85,7 @@ data "aws_iam_policy_document" "lambda_kms_policy_document" {
     actions = [
       "kms:GenerateDataKey"
     ]
-    resources = [aws_kinesis_stream.temperature-data-stream-tf.arn]
+    resources = ["*"]
   }
 }
 
