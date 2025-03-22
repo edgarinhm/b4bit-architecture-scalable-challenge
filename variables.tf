@@ -1,8 +1,4 @@
 # environment variables
-variable "aws_account_id" {
-  description = "AWS account id"
-  type        = string
-}
 
 variable "aws_region" {
   description = "The AWS region to use."

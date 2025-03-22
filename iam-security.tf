@@ -46,3 +46,30 @@ resource "aws_iam_role_policy" "role_kinesis_policy" {
 
   policy = data.aws_iam_policy_document.role_kinesis_policy_document.json
 }
+
+
+data "aws_iam_policy_document" "role_dynamodb_policy_document" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "dynamodb:GetItem",
+      "dynamodb:Query",
+      "dynamodb:Scan",
+      "dynamodb:PutItem",
+      "dynamodb:UpdateItem",
+      "dynamodb:DeleteItem",
+      "dynamodb:DescribeTable",
+      "dynamodb:ListTables"
+    ]
+    resources = [aws_dynamodb_table.data_lake.arn]
+  }
+}
+
+# Policy for Lambda Task Role (Application-Level Permissions)
+resource "aws_iam_role_policy" "lambda_task_policy" {
+  name   = "${var.project_name}-${var.environment}-lambda-task-policy"
+  role   = aws_iam_role.lambda_role_tf.id
+  policy = data.aws_iam_policy_document.role_dynamodb_policy_document.json
+}
+
+
