@@ -61,7 +61,7 @@ data "aws_iam_policy_document" "role_dynamodb_policy_document" {
       "dynamodb:DescribeTable",
       "dynamodb:ListTables"
     ]
-    resources = [aws_dynamodb_table.data_lake.arn]
+    resources = [aws_dynamodb_table.dynamodb_data_lake.arn]
   }
 }
 

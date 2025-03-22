@@ -35,28 +35,28 @@ variable "aws_dynamodb_table_name" {
 
 }
 
-# vpc variables
-variable "vpc_cidr" {
-  description = "vpc cidr block"
-  type        = string
-}
+# # vpc variables
+# variable "vpc_cidr" {
+#   description = "vpc cidr block"
+#   type        = string
+# }
 
-variable "public_subnet_az1_cidr" {
-  description = "public subnet az1 cidr block"
-  type        = string
-}
+# variable "public_subnet_az1_cidr" {
+#   description = "public subnet az1 cidr block"
+#   type        = string
+# }
 
-variable "public_subnet_az2_cidr" {
-  description = "public subnet az2 cidr block"
-  type        = string
-}
+# variable "public_subnet_az2_cidr" {
+#   description = "public subnet az2 cidr block"
+#   type        = string
+# }
 
-variable "private_app_subnet_az1_cidr" {
-  description = "private app subnet az1 cidr block"
-  type        = string
-}
+# variable "private_app_subnet_az1_cidr" {
+#   description = "private app subnet az1 cidr block"
+#   type        = string
+# }
 
-variable "private_app_subnet_az2_cidr" {
-  description = "private app subnet az2 cidr block"
-  type        = string
-}
+# variable "private_app_subnet_az2_cidr" {
+#   description = "private app subnet az2 cidr block"
+#   type        = string
+# }
