@@ -1,5 +1,6 @@
 import boto3
 import json
+import random
 
 # Initialize a Kinesis client with the boto3 library
 kinesis_client = boto3.client('kinesis')
