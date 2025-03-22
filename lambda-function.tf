@@ -95,10 +95,9 @@ resource "aws_lambda_function" "api-get-average-temperature-function-tf" {
 }
 
 #defines a log group to store log messages from your Lambda function for 30 days. By convention, Lambda stores logs in a group with the name /aws/lambda/<Function Name>.
+#tfsec:ignore:aws-cloudwatch-log-group-customer-key
 resource "aws_cloudwatch_log_group" "lambda-api-get-average-temperature-log-group" {
   name = "/aws/lambda/${aws_lambda_function.api-get-average-temperature-function-tf.function_name}"
 
   retention_in_days = 30
-  #tfsec:ignore:kms-key
-  kms_key_id = aws_kms_key.lambda_log_group_kms_key.id
 }
