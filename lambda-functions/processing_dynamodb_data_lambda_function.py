@@ -16,17 +16,14 @@ def process_temperature_data(records):
         total_temp += data['temperature']
         count += 1
     average_temp = total_temp / count if count else 0
-    return {'average_temperature': average_temp, 'id': record['eventID']}
+    return { 'id': { 'S': record['eventID']}, 'average_temperature': { 'N': str(average_temp)} }
 
 def lambda_handler(event, context):
-    processed_data = process_temperature_data(event['Records'])
+    item = process_temperature_data(event['Records'])
     #create table object
     table = dynamodb.Table(table_name)
 
-    # Convert the processed data to JSON
-    output_data = json.dumps(processed_data)
-
     # write the processed average temperature data into the dynamodb table
-    table.put_item(Item = {output_data})
+    table.put_item(Item = item)
     
-    return 'Successfully processed {} records. Average Temperature: {}'.format(len(event['Records']), processed_data['average_temperature']) 
+    return 'Successfully processed {} records. Average Temperature: {}'.format(len(event['Records']), item['average_temperature']['N']) 
