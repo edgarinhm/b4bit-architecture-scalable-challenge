@@ -11,3 +11,8 @@ resource "aws_kms_key" "data-kinesis-lambda-key" {
   enable_key_rotation     = true
 }
 
+resource "aws_kms_key" "data-dynamodb-lambda-key" {
+  description             = "KMS key for data dynamodb encryption"
+  deletion_window_in_days = 7
+  enable_key_rotation     = true
+}
