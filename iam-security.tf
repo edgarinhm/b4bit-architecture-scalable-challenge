@@ -73,4 +73,7 @@ resource "aws_iam_role_policy" "lambda_task_policy" {
   policy = data.aws_iam_policy_document.role_dynamodb_policy_document.json
 }
 
-
+resource "aws_iam_role_policy_attachment" "lambda_kms_roles" {
+  role       = aws_iam_role.lambda_role_tf.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/ROSAKMSProviderPolicy"
+}
