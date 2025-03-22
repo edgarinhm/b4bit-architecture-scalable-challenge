@@ -27,6 +27,6 @@ def lambda_handler(event, context):
     output_data = json.dumps(processed_data)
 
     # write the processed average temperature data into the dynamodb table
-    table.put_item(Item = {output_data})
+    table.put_item(Item = output_data)
     
     return 'Successfully processed {} records. Average Temperature: {}'.format(len(event['Records']), processed_data['average_temperature']) 
