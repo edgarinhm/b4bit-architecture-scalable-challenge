@@ -120,7 +120,7 @@ data "aws_iam_policy_document" "lambda_s3_role_policy_document" {
     ]
 
     resources = [
-      aws_s3_bucket.data_lake.arn
+      "${aws_s3_bucket.data_lake.arn}/*"
     ]
   }
 }
