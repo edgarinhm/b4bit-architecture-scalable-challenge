@@ -147,3 +147,10 @@ custom-role-kms-key-rotation-policy
 	]
 }
 ```
+
+### S3 bucket processed data 
+![image](https://github.com/user-attachments/assets/5021f199-6849-476e-81f1-05542b61c14a)
+
+### DynamoDB processed data
+![image](https://github.com/user-attachments/assets/2f491ed9-60bf-4444-97e6-3f41554b167b)
+
