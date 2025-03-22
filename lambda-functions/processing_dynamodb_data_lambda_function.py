@@ -4,7 +4,7 @@ import boto3
 
 #create a dynamodb client
 client = boto3.client('dynamodb')
-table_name = 'data-table-aggregation-lake'  # Replace with your bucket name
+table_name = 'data-table-aggregation-lake'  # Replace with your table name
 
 def process_temperature_data(records):
     # Calculate the average temperature from the records

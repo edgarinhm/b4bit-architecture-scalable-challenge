@@ -1,3 +1,4 @@
+#######################  Lambda Processing S3 Data #####################
 data "archive_file" "python_processing_lambda_package" {
   type        = "zip"
   source_file = "${path.module}/lambda-functions/processing_data_lambda_function.py"
@@ -34,15 +35,7 @@ resource "aws_lambda_event_source_mapping" "kinesis-processing-data-stream-event
   batch_size        = 100
 }
 
-# #defines a log group to store log messages from your Lambda function for 30 days. By convention, Lambda stores logs in a group with the name /aws/lambda/<Function Name>.
-# resource "aws_cloudwatch_log_group" "lambda-s3-processing-log-group" {
-#   name = "/aws/lambda/${aws_lambda_function.data-processing-function-tf.function_name}"
-
-#   retention_in_days = 30
-#   kms_key_id        = aws_kms_key.lambda_log_group_kms_key.arn
-# }
-
-#Lambda function to store dynamodb data
+#######################  Lambda Processing DynamoDB Data #####################
 data "archive_file" "python_processing_dynamodb_lambda_package" {
   type        = "zip"
   source_file = "${path.module}/lambda-functions/processing_dynamodb_data_lambda_function.py"
@@ -78,9 +71,33 @@ resource "aws_lambda_event_source_mapping" "kinesis-processing-dynamodb-data-str
 
 }
 
-# resource "aws_cloudwatch_log_group" "lambda-dynamodb-processing-log-group" {
-#   name = "/aws/lambda/${aws_lambda_function.data-processing-dynamodb-function-tf.function_name}"
+#######################  Lambda Outcome Api Data #####################
+data "archive_file" "python_api_get_lambda_package" {
+  type        = "zip"
+  source_file = "${path.module}/lambda-functions/api_get_data_lambda_function.py"
+  output_path = "${path.module}/api_get_data_lambda_function.zip"
+}
 
-#   retention_in_days = 30
-#   kms_key_id        = aws_kms_key.lambda_log_group_kms_key.arn
-# }
+resource "aws_lambda_function" "api-get-average-temperature-function-tf" {
+  function_name    = "APIGetDataFunction"
+  runtime          = var.aws_python_version
+  handler          = "api_get_data_lambda_function.lambda_handler"
+  role             = aws_iam_role.lambda_role_tf.arn
+  timeout          = 300
+  memory_size      = 128
+  source_code_hash = data.archive_file.python_api_get_lambda_package.output_base64sha256
+  filename         = data.archive_file.python_api_get_lambda_package.output_path
+
+  tracing_config {
+    mode = "Active"
+  }
+
+}
+
+#defines a log group to store log messages from your Lambda function for 30 days. By convention, Lambda stores logs in a group with the name /aws/lambda/<Function Name>.
+resource "aws_cloudwatch_log_group" "lambda-api-get-average-temperature-log-group" {
+  name = "/aws/lambda/${aws_lambda_function.api-get-average-temperature-function-tf.function_name}"
+
+  retention_in_days = 30
+  kms_key_id        = aws_kms_key.lambda_log_group_kms_key.id
+}
