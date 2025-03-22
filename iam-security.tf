@@ -84,7 +84,9 @@ data "aws_iam_policy_document" "lambda_kms_policy_document" {
   statement {
     effect = "Allow"
     actions = [
-      "kms:GenerateDataKey"
+      "kms:GenerateDataKey",
+      "kms:Decrypt",
+      "kms:Encrypt",
     ]
     resources = ["*"]
   }
