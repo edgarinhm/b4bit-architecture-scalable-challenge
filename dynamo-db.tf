@@ -1,4 +1,3 @@
-#tfsec:ignore:aws-dynamodb-enable-at-rest-encryption
 resource "aws_dynamodb_table" "data_lake" {
   name         = var.aws_dynamodb_table_name
   billing_mode = "PAY_PER_REQUEST"
@@ -10,6 +9,11 @@ resource "aws_dynamodb_table" "data_lake" {
   }
 
   server_side_encryption {
+    enabled     = true
+    kms_key_arn = aws_kms_key.data-dynamodb-lambda-key
+  }
+
+  point_in_time_recovery {
     enabled = true
   }
 
