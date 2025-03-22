@@ -28,7 +28,7 @@ def lambda_handler(event, context):
 
             #extract temperature            
             for item in items:
-                 average_temperature = item['average_temperature']
+                 average_temperature += item['average_temperature']
 
             message = f"Average temperature is {average_temperature}"
             body = message
