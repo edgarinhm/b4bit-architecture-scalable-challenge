@@ -1,4 +1,4 @@
-
+#tfsec:ignore:aws-dynamodb-enable-at-rest-encryption
 resource "aws_dynamodb_table" "data_lake" {
   name         = var.aws_dynamodb_table_name
   billing_mode = "PAY_PER_REQUEST"
@@ -7,6 +7,10 @@ resource "aws_dynamodb_table" "data_lake" {
   attribute {
     name = "id"
     type = "S"
+  }
+
+  server_side_encryption {
+    enabled = true
   }
 
   tags = {
