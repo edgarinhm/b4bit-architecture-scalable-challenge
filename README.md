@@ -82,7 +82,8 @@ OpenID Connect (OIDC) offers a more secure way to authenticate GitHub Actionswit
 
 Create a new rol for OIDC connection with the following policies:
 
-![image](https://github.com/user-attachments/assets/a0096d62-6e60-4975-b017-72dbba527a74)
+![image](https://github.com/user-attachments/assets/443f1643-5dc8-40f4-b7c2-e6db3df675d4)
+
 
 ##### Custom policies:
 custom-mock-data-generation-policy
@@ -147,3 +148,10 @@ custom-role-kms-key-rotation-policy
 	]
 }
 ```
+
+### S3 bucket processed data 
+![image](https://github.com/user-attachments/assets/5021f199-6849-476e-81f1-05542b61c14a)
+
+### DynamoDB processed data
+![image](https://github.com/user-attachments/assets/2f491ed9-60bf-4444-97e6-3f41554b167b)
+
