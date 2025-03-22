@@ -3,7 +3,7 @@ import base64
 import boto3
 
 #create a dynamodb client
-dynamodb = boto3.client('dynamodb')
+client = boto3.client('dynamodb')
 table_name = 'data-table-aggregation-lake'  # Replace with your bucket name
 
 def process_temperature_data(records):
@@ -20,10 +20,8 @@ def process_temperature_data(records):
 
 def lambda_handler(event, context):
     item = process_temperature_data(event['Records'])
-    #create table object
-    table = dynamodb.Table(table_name)
 
     # write the processed average temperature data into the dynamodb table
-    table.put_item(Item = item)
+    client.put_item(TableName=table_name, Item = item)
     
     return 'Successfully processed {} records. Average Temperature: {}'.format(len(event['Records']), item['average_temperature']['N']) 
