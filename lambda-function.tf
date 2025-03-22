@@ -13,8 +13,6 @@ resource "aws_lambda_function" "data-processing-function-tf" {
   memory_size      = 128
   source_code_hash = data.archive_file.python_processing_lambda_package.output_base64sha256
   filename         = data.archive_file.python_processing_lambda_package.output_path
-  s3_bucket        = aws_s3_bucket.data_lake.bucket
-  s3_key           = "processing_data_lambda_function.zip"
 
   tracing_config {
     mode = "Active"
