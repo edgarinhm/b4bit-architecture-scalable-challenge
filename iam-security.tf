@@ -36,7 +36,6 @@ data "aws_iam_policy_document" "role_kinesis_policy_document" {
       "kinesis:ListShards",
       "kinesis:ListStreams",
       "kinesis:PutRecord",
-      "kms:GenerateDataKey",
     ]
     resources = [aws_kinesis_stream.temperature-data-stream-tf.arn]
   }
@@ -74,7 +73,20 @@ resource "aws_iam_role_policy" "lambda_task_policy" {
   policy = data.aws_iam_policy_document.role_dynamodb_policy_document.json
 }
 
-resource "aws_iam_role_policy_attachment" "lambda_kms_roles" {
-  role       = aws_iam_role.lambda_role_tf.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/ROSAKMSProviderPolicy"
+data "aws_iam_policy_document" "lambda_kms_policy_document" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "kms:GenerateDataKey"
+    ]
+    resources = [aws_kinesis_stream.temperature-data-stream-tf.arn]
+  }
+}
+
+
+# Policy for Lambda Task Role (Application-Level Permissions)
+resource "aws_iam_role_policy" "lambda_kms_policy" {
+  name   = "${var.project_name}-${var.environment}-lambda-kms-policy"
+  role   = aws_iam_role.lambda_role_tf.id
+  policy = data.aws_iam_policy_document.lambda_kms_policy_document.json
 }
