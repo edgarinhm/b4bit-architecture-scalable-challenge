@@ -1,6 +1,7 @@
 import json
 import base64
 import boto3
+import datetime
 
 s3 = boto3.client('s3')
 bucket_name = 'data-aggregation-lake'  # Replace with your bucket name
@@ -24,7 +25,7 @@ def lambda_handler(event, context):
     output_data = json.dumps(processed_data)
 
     # Generate a key for the S3 object
-    key = 'processed_data/average_temperature.json'
+    key =  'processed_data/average_temperature_{date:%Y-%m-%d-%H-%M-%S}.json'.format( date=datetime.datetime.now() )
 
     # Put the processed average temperature data into the S3 bucket
     s3.put_object(Bucket=bucket_name, Key=key, Body=output_data)

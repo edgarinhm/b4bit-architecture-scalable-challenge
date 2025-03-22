@@ -1,5 +1,7 @@
 resource "aws_s3_bucket" "data_lake" {
-  bucket = var.aws_s3_bucket_data_lake_name
+  bucket        = var.aws_s3_bucket_data_lake_name
+  force_destroy = true
+
   tags = {
     Name = "Data Lake bucket"
   }
@@ -43,7 +45,8 @@ resource "aws_s3_bucket_versioning" "data_lake_versioning" {
 
 #tfsec:ignore:aws-s3-enable-bucket-encryption tfsec:ignore:aws-s3-enable-bucket-logging tfsec:ignore:aws-s3-enable-logging tfsec:ignore:enable-logging tfsec:ignore:avd-aws-0089 tfsec:ignore:AVD-AWS-0089
 resource "aws_s3_bucket" "data_lake_log" {
-  bucket = "${var.aws_s3_bucket_data_lake_name}-log-${random_string.suffix.result}"
+  bucket        = "${var.aws_s3_bucket_data_lake_name}-log-${random_string.suffix.result}"
+  force_destroy = true
   tags = {
     Name = "Log bucket"
   }
