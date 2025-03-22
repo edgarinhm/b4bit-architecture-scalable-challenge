@@ -10,7 +10,7 @@ resource "aws_dynamodb_table" "data_lake" {
 
   server_side_encryption {
     enabled     = true
-    kms_key_arn = aws_kms_key.data-dynamodb-lambda-key
+    kms_key_arn = aws_kms_key.data-dynamodb-lambda-key.arn
   }
 
   point_in_time_recovery {
