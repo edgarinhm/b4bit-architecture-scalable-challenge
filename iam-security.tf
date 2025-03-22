@@ -99,3 +99,14 @@ resource "aws_iam_role_policy" "lambda_kms_policy" {
   role   = aws_iam_role.lambda_role_tf.id
   policy = data.aws_iam_policy_document.lambda_kms_policy_document.json
 }
+
+#attaches a policy to the IAM role. The AWSLambdaBasicExecutionRole is an AWS managed policy that allows your Lambda function to write to CloudWatch logs.
+resource "aws_iam_role_policy_attachment" "lambda_policy" {
+  role       = aws_iam_role.lambda_role_tf.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_dynamodb_roles" {
+  role       = aws_iam_role.lambda_role_tf.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
+}

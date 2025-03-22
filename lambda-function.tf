@@ -13,6 +13,9 @@ resource "aws_lambda_function" "data-processing-function-tf" {
   memory_size      = 128
   source_code_hash = data.archive_file.python_processing_lambda_package.output_base64sha256
   filename         = data.archive_file.python_processing_lambda_package.output_path
+  s3_bucket        = aws_s3_bucket.data_lake.bucket
+  s3_key           = "processing_data_lambda_function.zip"
+
   tracing_config {
     mode = "Active"
   }
@@ -33,7 +36,14 @@ resource "aws_lambda_event_source_mapping" "kinesis-processing-data-stream-event
   batch_size        = 100
 }
 
-#Lambda function to get blog data
+#defines a log group to store log messages from your Lambda function for 30 days. By convention, Lambda stores logs in a group with the name /aws/lambda/<Function Name>.
+resource "aws_cloudwatch_log_group" "lambda-s3-processing-log-group" {
+  name = "/aws/lambda/${aws_lambda_function.data-processing-function-tf.function_name}"
+
+  retention_in_days = 30
+}
+
+#Lambda function to store dynamodb data
 data "archive_file" "python_processing_dynamodb_lambda_package" {
   type        = "zip"
   source_file = "${path.module}/lambda-functions/processing_dynamodb_data_lambda_function.py"
@@ -67,4 +77,10 @@ resource "aws_lambda_event_source_mapping" "kinesis-processing-dynamodb-data-str
   starting_position = "LATEST"
   batch_size        = 100
 
+}
+
+resource "aws_cloudwatch_log_group" "lambda-dynamodb-processing-log-group" {
+  name = "/aws/lambda/${aws_lambda_function.data-processing-dynamodb-function-tf.function_name}"
+
+  retention_in_days = 30
 }
