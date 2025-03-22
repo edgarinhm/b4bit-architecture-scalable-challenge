@@ -9,10 +9,20 @@ resource "aws_dynamodb_table" "data_lake" {
     type = "S"
   }
 
+  server_side_encryption {
+    enabled = true
+  }
+
   tags = {
     Name = var.aws_dynamodb_table_name
   }
 }
+
+resource "a" "name" {
+
+}
+
+
 
 # Data source to dynamically fetch the service name for DynamoDB
 data "aws_vpc_endpoint_service" "dynamodb" {
