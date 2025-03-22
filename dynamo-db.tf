@@ -7,10 +7,6 @@ resource "aws_dynamodb_table" "dynamodb_data_lake" {
     name = "id"
     type = "S"
   }
-  attribute {
-    name = "average_temperature"
-    type = "N"
-  }
 
   server_side_encryption {
     enabled     = true
