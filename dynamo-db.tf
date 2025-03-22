@@ -18,12 +18,6 @@ resource "aws_dynamodb_table" "data_lake" {
   }
 }
 
-resource "a" "name" {
-
-}
-
-
-
 # Data source to dynamically fetch the service name for DynamoDB
 data "aws_vpc_endpoint_service" "dynamodb" {
   service      = "dynamodb"
