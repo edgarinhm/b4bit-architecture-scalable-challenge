@@ -34,7 +34,8 @@ data "aws_iam_policy_document" "role_kinesis_policy_document" {
       "kinesis:DescribeStream",
       "kinesis:DescribeStreamSummary",
       "kinesis:ListShards",
-      "kinesis:ListStreams"
+      "kinesis:ListStreams",
+      "kinesis:PutRecord",
     ]
     resources = [aws_kinesis_stream.temperature-data-stream-tf.arn]
   }
