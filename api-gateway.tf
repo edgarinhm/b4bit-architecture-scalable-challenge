@@ -10,6 +10,20 @@ resource "aws_apigatewayv2_stage" "stage-lambda-get-average-temperature" {
 
   name        = var.environment
   auto_deploy = true
+  access_log_settings {
+    destination_arn = aws_cloudwatch_log_group.lambda-api-get-average-temperature-log-group.arn
+    format = jsonencode({
+      requestId      = "$context.requestId",
+      ip             = "$context.identity.sourceIp",
+      requestTime    = "$context.requestTime",
+      httpMethod     = "$context.httpMethod",
+      routeKey       = "$context.routeKey",
+      status         = "$context.status",
+      protocol       = "$context.protocol",
+      responseLength = "$context.responseLength"
+    })
+  }
+
 }
 
 #integration

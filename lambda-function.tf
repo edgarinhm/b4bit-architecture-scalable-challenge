@@ -99,4 +99,5 @@ resource "aws_cloudwatch_log_group" "lambda-api-get-average-temperature-log-grou
   name = "/aws/lambda/${aws_lambda_function.api-get-average-temperature-function-tf.function_name}"
 
   retention_in_days = 30
+  kms_key_id        = aws_kms_key.lambda_log_group_kms_key.id
 }
