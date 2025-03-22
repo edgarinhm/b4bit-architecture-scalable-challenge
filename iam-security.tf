@@ -110,3 +110,24 @@ resource "aws_iam_role_policy_attachment" "lambda_dynamodb_roles" {
   role       = aws_iam_role.lambda_role_tf.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
 }
+
+data "aws_iam_policy_document" "lambda_s3_role_policy_document" {
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "s3:PutObject"
+    ]
+
+    resources = [
+      aws_s3_bucket.data_lake.arn
+    ]
+  }
+}
+
+# Policy for S3 Lambda Task Role (Application-Level Permissions)
+resource "aws_iam_role_policy" "lambda_s3_policy" {
+  name   = "${var.project_name}-${var.environment}-lambda-s3-policy"
+  role   = aws_iam_role.lambda_role_tf.id
+  policy = data.aws_iam_policy_document.lambda_s3_role_policy_document.json
+}
