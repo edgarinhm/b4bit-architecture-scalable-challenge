@@ -18,11 +18,9 @@ def lambda_handler(event, context):
         if route_key == "GET /api/v1/temperature":
 
             #get current average temperature
-            response = client.get_item(
+            response = client.query(
                 TableName=table_name,
-                Key={
-                    "user": {"S": "temperature"}
-                }
+                Limit=15,
             )
 
             #extract temperature
