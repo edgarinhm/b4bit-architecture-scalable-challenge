@@ -26,4 +26,4 @@ def lambda_handler(event, context):
     # write the processed average temperature data into the dynamodb table
     table.put_item(Item = item)
     
-    return 'Successfully processed {} records. Average Temperature: {}'.format(len(event['Records']), processed_data['average_temperature']) 
+    return 'Successfully processed {} records. Average Temperature: {}'.format(len(event['Records']), item['average_temperature']['N']) 
