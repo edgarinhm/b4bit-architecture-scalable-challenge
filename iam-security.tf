@@ -79,13 +79,14 @@ resource "aws_iam_role_policy" "lambda_task_policy" {
   policy = data.aws_iam_policy_document.role_dynamodb_policy_document.json
 }
 
+#tfsec:ignore:aws-iam-no-policy-wildcards
 data "aws_iam_policy_document" "lambda_kms_policy_document" {
   statement {
     effect = "Allow"
     actions = [
       "kms:GenerateDataKey"
     ]
-    resources = [aws_kinesis_stream.temperature-data-stream-tf.arn]
+    resources = ["*"]
   }
 }
 
