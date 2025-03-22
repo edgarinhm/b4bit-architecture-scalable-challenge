@@ -1,0 +1,38 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "CustomRoleLambdaS1",
+      "Effect": "Allow",
+      "Action": [
+        "lambda:CreateFunction",
+        "lambda:GetFunction",
+        "lambda:ListVersionsByFunction",
+        "lambda:GetFunctionCodeSigningConfig",
+        "lambda:DeleteFunction",
+        "lambda:AddPermission",
+        "lambda:GetPolicy",
+        "lambda:RemovePermission",
+        "lambda:CreateEventSourceMapping",
+        "lambda:GetEventSourceMapping",
+        "lambda:ListTags",
+        "lambda:DeleteEventSourceMapping"
+      ],
+      "Resource": ["*"]
+    },
+    {
+      "Sid": "CustomRoleEventS1",
+      "Effect": "Allow",
+      "Action": [
+        "events:PutRule",
+        "events:DescribeRule",
+        "events:ListTagsForResource",
+        "events:DeleteRule",
+        "events:PutTargets",
+        "events:ListTargetsByRule",
+        "events:RemoveTargets"
+      ],
+      "Resource": ["*"]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "CloudWatchS1",
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogDelivery",
+        "logs:PutResourcePolicy",
+        "logs:UpdateLogDelivery",
+        "logs:DeleteLogDelivery",
+        "logs:CreateLogGroup",
+        "logs:DescribeResourcePolicies",
+        "logs:GetLogDelivery",
+        "logs:ListLogDeliveries",
+        "logs:PutRetentionPolicy",
+        "logs:DescribeLogGroups",
+        "logs:ListTagsForResource",
+        "logs:DeleteLogGroup"
+      ],
+      "Resource": ["*"]
+    }
+  ]
+}
