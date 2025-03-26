@@ -58,7 +58,7 @@ resource "aws_lambda_function" "data-processing-dynamodb-function-tf" {
   environment {
     variables = {
       KINESIS_STREAM_NAME = aws_kinesis_stream.temperature-data-stream-tf.name
-      dynamodb_table_name = aws_dynamodb_table.dynamodb_data_lake.name
+      DYNAMODB_TABLE_NAME = aws_dynamodb_table.dynamodb_data_lake.name
     }
   }
 }

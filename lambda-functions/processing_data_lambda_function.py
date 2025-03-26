@@ -4,7 +4,7 @@ import boto3
 import datetime
 
 s3 = boto3.client('s3')
-bucket_name = 'data-aggregation-lake'  # Replace with your bucket name
+bucket_name =  os.environ.get("BUCKET_NAME")  # 'data-aggregation-lake'  # Replace with your bucket name
 
 def process_temperature_data(records):
     # Calculate the average temperature from the records
