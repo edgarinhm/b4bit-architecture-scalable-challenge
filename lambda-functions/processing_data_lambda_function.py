@@ -22,7 +22,7 @@ def process_temperature_data(records):
         payload = base64.b64decode(record["kinesis"]["data"])
         data = json.loads(payload)
         # Put the raw temperature data into the S3 bucket
-        store_json_data_to_bucket('raw_data', 'temperature_{id}_'.format(id=count), data)
+        store_json_data_to_bucket('raw_data', 'temperature_{id}_'.format(id=count), payload)
         total_temp += data['temperature']
         count += 1
     average_temp = total_temp / count if count else 0
