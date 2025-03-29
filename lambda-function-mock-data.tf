@@ -44,3 +44,13 @@ resource "aws_lambda_event_source_mapping" "kinesis-data-stream-event-source-tf"
   starting_position = "LATEST"
   batch_size        = 100
 }
+
+
+#tfsec:ignore:aws-cloudwatch-log-group-customer-key
+resource "aws_cloudwatch_log_group" "lambda-data-generator-temperature-log-group" {
+  name              = "/aws/lambda/${aws_lambda_function.data-generator-function.function_name}"
+  retention_in_days = 30
+  lifecycle {
+    prevent_destroy = false
+  }
+}
