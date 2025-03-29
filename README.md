@@ -147,6 +147,8 @@ custom-role-kms-key-rotation-policy
 	]
 }
 ```
+### S3 bucket raw data
+![image](https://github.com/user-attachments/assets/7fdaf429-a274-4b54-8f7a-9731450be13c)
 
 ### S3 bucket processed data 
 ![image](https://github.com/user-attachments/assets/5021f199-6849-476e-81f1-05542b61c14a)
