@@ -51,6 +51,7 @@ resource "aws_lambda_function" "data-processing-dynamodb-function-tf" {
   memory_size      = 128
   source_code_hash = data.archive_file.python_processing_dynamodb_lambda_package.output_base64sha256
   filename         = data.archive_file.python_processing_dynamodb_lambda_package.output_path
+
   tracing_config {
     mode = "Active"
   }
@@ -97,7 +98,27 @@ resource "aws_lambda_function" "api-get-average-temperature-function-tf" {
 #defines a log group to store log messages from your Lambda function for 30 days. By convention, Lambda stores logs in a group with the name /aws/lambda/<Function Name>.
 #tfsec:ignore:aws-cloudwatch-log-group-customer-key
 resource "aws_cloudwatch_log_group" "lambda-api-get-average-temperature-log-group" {
-  name = "/aws/lambda/${aws_lambda_function.api-get-average-temperature-function-tf.function_name}"
-
+  name              = "/aws/lambda/${aws_lambda_function.api-get-average-temperature-function-tf.function_name}"
   retention_in_days = 30
+  lifecycle {
+    prevent_destroy = false
+  }
+}
+
+#tfsec:ignore:aws-cloudwatch-log-group-customer-key
+resource "aws_cloudwatch_log_group" "lambda-processing-bucket-temperature-log-group" {
+  name              = "/aws/lambda/${aws_lambda_function.data-processing-function-tf.function_name}"
+  retention_in_days = 30
+  lifecycle {
+    prevent_destroy = false
+  }
+}
+
+#tfsec:ignore:aws-cloudwatch-log-group-customer-key
+resource "aws_cloudwatch_log_group" "lambda-processing-dynamodb-temperature-log-group" {
+  name              = "/aws/lambda/${aws_lambda_function.data-processing-dynamodb-function-tf.function_name}"
+  retention_in_days = 30
+  lifecycle {
+    prevent_destroy = false
+  }
 }
